@@ -18,7 +18,7 @@ const businessRoute = require('../router/business.router');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('./business', businessRoute);
+app.use('/business', businessRoute);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
