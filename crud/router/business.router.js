@@ -5,7 +5,7 @@ let Business = require('../api/models/Business');
 businessRoutes.route('/add').post(function(req, res){
     let business = new Business(req.body);
     business.save()
-        .then(business = {
+        .then(business => {
             res.status(200).json({'business': 'business in added successfully'});
         })
         .catch(err => {
