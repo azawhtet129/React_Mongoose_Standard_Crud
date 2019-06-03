@@ -25,7 +25,7 @@ businessRoutes.route('/').get(function(req, res){
 });
 businessRoutes.route('/edit/:id').get(function(req, res){
     let id = req.params.id;
-    Business.findById(id, function (err, business){
+    Business.findById(id, function (err, businesses){
         if(err)
             console.log(err)
         else
@@ -33,15 +33,16 @@ businessRoutes.route('/edit/:id').get(function(req, res){
     })
 });
 businessRoutes.route('/update/:id').post(function(req, res){
+    let id = req.params.id;
     Business.findById(id, function(err, businesses){
         if(!businesses)
             res.status(400).send("data is not found");
         else{
-            business.person_name = req.body.person_name;
-            business.business_name = req.body.business_name;
-            business.business_gst_number = req.body.business_gst_number;
-            business.save()
-                .then(business => {
+            businesses.person_name = req.body.person_name;
+            businesses.business_name = req.body.business_name;
+            businesses.business_gst_number = req.body.business_gst_number;
+            businesses.save()
+                .then(businesses => {
                     res.json("Updae complete");
                 })
                 .catch(err => {
@@ -52,11 +53,11 @@ businessRoutes.route('/update/:id').post(function(req, res){
     })
 })
 businessRoutes.route('/delete/:id').get(function(req, res){
-    business.findByIdAndRemove({_id:req.params.id}, function(err, business){
+    Business.findByIdAndRemove({_id:req.params.id}, function(err, businesses){
         if(err)
             res.json(err)
         else    
-            res.jsob('Successflly removed');
+            res.json('Successflly removed');
     })
 })
 
